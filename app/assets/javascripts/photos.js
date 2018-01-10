@@ -26,31 +26,53 @@ function setPreviewListIsEmpty() {
   preview.appendChild(para);
 }
 
+const fileTypes = [
+  'image/jpeg',
+  'image/pjpeg',
+  'image/png'
+];
+
 function validFileType(file) {
-  return true;
+  for(var i = 0; i < fileTypes.length; i++) {
+    if(file.type === fileTypes[i]) {
+      return true;
+    }
+  }
+  return false;
 }
 
-function getFileSize(file) {
-  return "0kb";
+function returnFileSize(file) {
+  const number = file.size;
+  if(number < 1024) {
+    return number + 'bytes';
+  } else if(number > 1024 && number < 1048576) {
+    return (number/1024).toFixed(1) + 'KB';
+  } else if(number > 1048576) {
+    return (number/1048576).toFixed(1) + 'MB';
+  }
 }
 
-function getFilePreviewText(file) {
-  return "File name " + file.name + ", file size " + getFileSize(file) + ".";
+function getPhotoPreviewText(file) {
+  return "File name " + file.name + ", file size " + returnFileSize(file) + ".";
 }
 
-function getPreviewForPhoto(file) {
+function getInvalidFileText(file) {
+  return 'File name ' + curFiles[i].name + ': Not a valid file type. Update your selection.';
+}
+
+function getListItemParaText(func) {
   var listItem = document.createElement('li');
   var para = document.createElement('p');
-  para.textContent = getFilePreviewText(file);
+  para.textContent = func();
   listItem.appendChild(para);
   return listItem;
 }
 
 function getPreviewForFile(file) {
   if (validFileType(file)) {
-    return getPreviewForPhoto(file);
+    return getListItemParaText(function() { return getPhotoPreviewText(file); });
   } else {
-    return null;
+    return getListItemParaText(function(){ return getInvalidFileText(file); });
   }
 }
 
