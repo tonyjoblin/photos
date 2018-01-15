@@ -5,7 +5,7 @@
 var input, preview;
 
 function setup() {
-  input = document.querySelector('input');
+  input = document.querySelector('#image_uploads');
   preview = document.querySelector('.preview');
 
   // hide the file input

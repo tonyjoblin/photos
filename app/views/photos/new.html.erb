@@ -1,4 +1,4 @@
-<form method="post" enctype="multipart/form-data">
+<%= form_with scope: :photo, url: photos_path, multipart: true, local: true do |form| %>
   <div>
     <label for="image_uploads" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
         Choose images to upload (PNG, JPG)
@@ -9,6 +9,6 @@
     <p>No files currently selected for upload</p>
   </div>
   <div>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Submit</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Submit</button>
   </div>
-</form>
+<% end %>

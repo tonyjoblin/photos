@@ -1,1 +1,7 @@
 <h1>photo index view</h1>
+
+<ul>
+  <% @photos.each do |photo| %>
+  <li><%= photo.original_name %>
+  <% end %>
+</ul>
