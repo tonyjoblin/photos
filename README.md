@@ -1,24 +1,21 @@
-# README
+# My Photo Album
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## About
 
-Things you may want to cover:
+Started as a 1-hour of code each day project.
 
-* Ruby version
+Originally looking at file uploads as an exercise, because that was what I was working on at work. Beyond that it will be a learning tool for rails, javascript and css.
 
-* System dependencies
+## TODO
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Make photo index the default landing page
+Implement photo index page
+Create photo needs to create uploads folder if it does not exist.
+Backend validation on create photo action by mime type, and photo size, and number of photos uploaded.
+Deleting photo
+Adding captions to photos
+Allow tags on photos.
+Add optional description to photos.
+Detecting duplicate photo uploads
+AI to automatically detect contents of photo and tag photos
+Allow maximum limit on backend storage used. Enforce through front and backend validations.
