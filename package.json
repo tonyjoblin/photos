@@ -1,5 +1,8 @@
 {
   "name": "files",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "jshint": "^2.9.5"
+  }
 }
