@@ -1,5 +1,6 @@
 require 'securerandom'
 
+# Photos controller
 class PhotosController < ApplicationController
   def index
     @photos = Photo.all
@@ -10,8 +11,6 @@ class PhotosController < ApplicationController
   end
 
   def create
-    byebug
-
     uploaded_io = params[:image_uploads]
     file_name = Rails.root.join('public', 'uploads', SecureRandom.uuid)
     File.open(file_name, 'wb') do |file|
@@ -23,6 +22,6 @@ class PhotosController < ApplicationController
     @photo.file_name = file_name
     @photo.save
 
-    render action: "index"
+    render action: 'index'
   end
 end

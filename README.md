@@ -8,8 +8,7 @@ Originally looking at file uploads as an exercise, because that was what I was w
 
 ## TODO
 
-Make photo index the default landing page
-Implement photo index page
+Display list of photos on photo#index page
 Create photo needs to create uploads folder if it does not exist.
 Backend validation on create photo action by mime type, and photo size, and number of photos uploaded.
 Deleting photo
@@ -19,3 +18,8 @@ Add optional description to photos.
 Detecting duplicate photo uploads
 AI to automatically detect contents of photo and tag photos
 Allow maximum limit on backend storage used. Enforce through front and backend validations.
+
+## Done
+
+Make photo index the default landing page
+Put add photo button on photo#index page

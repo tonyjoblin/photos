@@ -1,5 +1,12 @@
 <h1>photo index view</h1>
 
+<form action="<%= new_photo_path %>">
+  <button 
+    class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <i class="material-icons">add</i>
+  </button>
+</form>
+
 <ul>
   <% @photos.each do |photo| %>
   <li><%= photo.original_name %>
