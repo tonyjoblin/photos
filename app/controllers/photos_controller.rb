@@ -7,21 +7,41 @@ class PhotosController < ApplicationController
   end
 
   def new
-    # byebug
   end
 
   def create
+    create_uploads_folder_if_not_exist
+
+    file_name = random_filename_for_upload
     uploaded_io = params[:image_uploads]
-    file_name = Rails.root.join('public', 'uploads', SecureRandom.uuid)
-    File.open(file_name, 'wb') do |file|
-      file.write(uploaded_io.read)
-    end
+    upload_photo file_name, uploaded_io
 
     @photo = Photo.new
-    @photo.original_name = params[:image_uploads].original_filename
+    @photo.original_name = uploaded_io.original_filename
     @photo.file_name = file_name
-    @photo.save
+    @photo.save!
 
-    render action: 'index'
+    redirect_to action: 'index'
+  end
+
+  private
+
+  def upload_photo(to_file_name, from_io)
+    File.open(to_file_name, 'wb') do |file|
+      file.write(from_io.read)
+    end
+  end
+
+  def random_filename_for_upload
+    File.join uploads_folder_path, SecureRandom.uuid
+  end
+
+  def uploads_folder_path
+    Rails.root.join('public', 'uploads')
+  end
+
+  def create_uploads_folder_if_not_exist
+    uploads_folder = uploads_folder_path
+    Dir.mkdir uploads_folder unless Dir.exist? uploads_folder
   end
 end

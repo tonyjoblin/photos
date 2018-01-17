@@ -9,7 +9,6 @@ Originally looking at file uploads as an exercise, because that was what I was w
 ## TODO
 
 Display list of photos on photo#index page
-Create photo needs to create uploads folder if it does not exist.
 Backend validation on create photo action by mime type, and photo size, and number of photos uploaded.
 Deleting photo
 Adding captions to photos
@@ -23,3 +22,4 @@ Allow maximum limit on backend storage used. Enforce through front and backend v
 
 Make photo index the default landing page
 Put add photo button on photo#index page
+Create photo needs to create uploads folder if it does not exist.
