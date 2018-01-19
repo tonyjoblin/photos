@@ -26,3 +26,6 @@ Allow maximum limit on backend storage used. Enforce through front and backend v
 Make photo index the default landing page
 Put add photo button on photo#index page
 Create photo needs to create uploads folder if it does not exist.
+Added Tests for Photo model class.
+Added validation to enforce presence of photo name and file name.
+Database migration to make photo names not null.
