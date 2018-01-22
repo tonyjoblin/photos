@@ -6,25 +6,49 @@ class PhotosController < ApplicationController
     @photos = Photo.all
   end
 
-  def new
-  end
+  def new; end
 
   def create
+    # TODO: this only needs to be once off setup code
+    # not every call to create
     create_uploads_folder_if_not_exist
 
-    file_name = random_filename_for_upload
-    uploaded_io = params[:image_uploads]
-    upload_photo file_name, uploaded_io
-
-    @photo = Photo.new
-    @photo.original_name = uploaded_io.original_filename
-    @photo.file_name = file_name
-    @photo.save!
+    images = create_params
+    images.each do |image|
+      next unless content_type_is_valid? image.content_type
+      # render :bad_request unless uploaded_io # TODO fix
+      # TODO check max image sizes
+      # TODO check max image uploads
+      # TODO handle more than one image upload
+      create_and_store_image image
+    end
 
     redirect_to action: 'index'
   end
 
   private
+
+  def create_and_store_image(image)
+    file_name = random_filename_for_upload
+    upload_photo file_name, image
+
+    @photo = Photo.new
+    @photo.original_name = image.original_filename
+    @photo.file_name = file_name
+    @photo.save!
+  end
+
+  def content_type_is_valid?(content_type)
+    allowed_mimetypes.include? content_type
+  end
+
+  def allowed_mimetypes
+    ['image/jpeg', 'image/png']
+  end
+
+  def create_params
+    params.require(:image_uploads)
+  end
 
   def upload_photo(to_file_name, from_io)
     File.open(to_file_name, 'wb') do |file|

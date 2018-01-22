@@ -9,10 +9,10 @@ Originally looking at file uploads as an exercise, because that was what I was w
 ## TODO
 
 Testing photos controller create action
-Handle uploading more than one photo
 Page to display detail of individual photo
 Display list of photos on photo#index page
-Backend validation on create photo action by mime type, and photo size, and number of photos uploaded.
+Validate maximum number of photos uploaded.
+Validate maximum image sizes.
 Deleting photo
 Adding captions to photos
 Allow tags on photos.
@@ -23,6 +23,8 @@ Allow maximum limit on backend storage used. Enforce through front and backend v
 
 ## Done
 
+Handle uploading more than one photo
+Backend validate mime types.
 Make photo index the default landing page
 Put add photo button on photo#index page
 Create photo needs to create uploads folder if it does not exist.
