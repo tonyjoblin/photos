@@ -13,6 +13,7 @@ Page to display detail of individual photo
 Display list of photos on photo#index page
 Validate maximum number of photos uploaded.
 Validate maximum image sizes.
+Handle errors from create photo
 Deleting photo
 Adding captions to photos
 Allow tags on photos.

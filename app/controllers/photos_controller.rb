@@ -13,20 +13,38 @@ class PhotosController < ApplicationController
     # not every call to create
     create_uploads_folder_if_not_exist
 
+    @create_errors = []
+    @create_success = []
     images = create_params
     images.each do |image|
-      next unless content_type_is_valid? image.content_type
+      unless content_type_is_valid? image.content_type
+        @create_errors.push(invalid_mime_type_msg(image))
+        next
+      end
       # render :bad_request unless uploaded_io # TODO fix
       # TODO check max image sizes
       # TODO check max image uploads
       # TODO handle more than one image upload
       create_and_store_image image
+      @create_success.push create_ok_msg(image)
     end
 
-    redirect_to action: 'index'
+    if @create_errors.empty?
+      redirect_to action: 'index'
+    else
+      render action: 'new'
+    end
   end
 
   private
+
+  def create_ok_msg(image)
+    "The image #{image.original_filename} was successfully uploaded."
+  end
+
+  def invalid_mime_type_msg(image)
+    "The image #{image.original_filename} has an invalid mime type of #{image.content_type}."
+  end
 
   def create_and_store_image(image)
     file_name = random_filename_for_upload

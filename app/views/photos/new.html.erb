@@ -1,3 +1,25 @@
+<% if defined?(@create_errors) && @create_errors.any? %>
+
+  <p>There were errors uploading your photos.</p>
+  <ul>
+  <% @create_errors.each do |e| %>
+    <li><%= e %></li>
+  <% end %>
+  </ul>
+
+  <% if defined?(@create_success) && @create_success.any? %>
+    <p>The following images were successfully uploaded</p>
+    <ul>
+    <% @create_success.each do |e| %>
+      <li><%= e %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+<% end %>
+
+<p><a href="<%= photos_url %>">Return to photo wall </a></p>
+
 <%= form_with scope: :photo, url: photos_path, multipart: true, local: true do |form| %>
   <div>
     <label for="image_uploads" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
