@@ -4,6 +4,9 @@ require 'securerandom'
 class PhotosController < ApplicationController
   def index
     @photos = Photo.all
+    @photos.each do |p|
+      p.url = image_url(p.file_name)
+    end
   end
 
   def new; end
@@ -47,8 +50,8 @@ class PhotosController < ApplicationController
   end
 
   def create_and_store_image(image)
-    file_name = random_filename_for_upload
-    upload_photo file_name, image
+    file_name = random_filename image
+    upload_photo image_pathname(file_name), image
 
     @photo = Photo.new
     @photo.original_name = image.original_filename
@@ -74,12 +77,21 @@ class PhotosController < ApplicationController
     end
   end
 
-  def random_filename_for_upload
-    File.join uploads_folder_path, SecureRandom.uuid
+  def random_filename(image)
+    ext = Pathname.new(image.original_filename).extname
+    SecureRandom.uuid + ext
+  end
+
+  def image_url(filename)
+    Pathname.new('uploads').join(filename)
   end
 
   def uploads_folder_path
-    Rails.root.join('public', 'uploads')
+    Pathname.new('public').join('uploads')
+  end
+
+  def image_pathname(filename)
+    uploads_folder_path.join(filename)
   end
 
   def create_uploads_folder_if_not_exist
