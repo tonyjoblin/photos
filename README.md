@@ -8,6 +8,7 @@ Originally looking at file uploads as an exercise, because that was what I was w
 
 ## TODO
 
+Paging on photo index page
 Testing photos controller create action
 Page to display detail of individual photo
 Validate maximum number of photos uploaded.
@@ -23,6 +24,8 @@ Allow maximum limit on backend storage used. Enforce through front and backend v
 
 ## Done
 
+Use partial to render photo card
+Layout photos in grid
 Display list of photos on photo#index page
 Handle uploading more than one photo
 Backend validate mime types.
