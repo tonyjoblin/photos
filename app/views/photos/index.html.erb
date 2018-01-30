@@ -1,25 +1,26 @@
+<div class="margins">
+  <form action="<%= new_photo_path %>">
+    <button 
+      class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+      <i class="material-icons">add</i>
+    </button>
+  </form>
 
-<form action="<%= new_photo_path %>">
-  <button 
-    class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-    <i class="material-icons">add</i>
-  </button>
-</form>
-
-<% for i in (0..@photos.length - 1).step(3) %>
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col">
-      <%= render partial: "card", locals: { photo: @photos[i] } %>
+  <% for i in (0..@photos.length - 1).step(3) %>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--4-col">
+        <%= render partial: "card", locals: { photo: @photos[i] } %>
+      </div>
+      <div class="mdl-cell mdl-cell--4-col">
+        <% if i + 1 < @photos.length %>
+          <%= render partial: "card", locals: { photo: @photos[i + 1] } %>
+        <% end %>
+      </div>
+      <div class="mdl-cell mdl-cell--4-col">
+        <% if i + 2 < @photos.length %>
+          <%= render partial: "card", locals: { photo: @photos[i + 2] } %>
+        <% end %>
+      </div>
     </div>
-    <div class="mdl-cell mdl-cell--4-col">
-      <% if i + 1 < @photos.length %>
-        <%= render partial: "card", locals: { photo: @photos[i + 1] } %>
-      <% end %>
-    </div>
-    <div class="mdl-cell mdl-cell--4-col">
-      <% if i + 2 < @photos.length %>
-        <%= render partial: "card", locals: { photo: @photos[i + 2] } %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

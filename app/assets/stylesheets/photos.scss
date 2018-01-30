@@ -5,7 +5,7 @@
 .photo-card {
   width: 320px;
   // height: 300px;
-  margin: 10px;
+  margin: 10px auto 10px auto;
 }
 
 .photo-img {
@@ -14,4 +14,9 @@
   height: 280px;
   margin: 0 auto;
   display: block;
+}
+
+.margins {
+  margin: 0 auto;
+  max-width: 1095px;
 }
