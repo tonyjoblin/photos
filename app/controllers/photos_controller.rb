@@ -18,7 +18,8 @@ class PhotosController < ApplicationController
 
     @create_errors = []
     @create_success = []
-    images = create_params
+    images = image_params
+    description = text_params
     images.each do |image|
       unless content_type_is_valid? image.content_type
         @create_errors.push(invalid_mime_type_msg(image))
@@ -28,7 +29,7 @@ class PhotosController < ApplicationController
       # TODO check max image sizes
       # TODO check max image uploads
       # TODO handle more than one image upload
-      create_and_store_image image
+      create_and_store_image image, description[:caption], description[:story]
       @create_success.push create_ok_msg(image)
     end
 
@@ -49,13 +50,15 @@ class PhotosController < ApplicationController
     "The image #{image.original_filename} has an invalid mime type of #{image.content_type}."
   end
 
-  def create_and_store_image(image)
+  def create_and_store_image(image, caption, story)
     file_name = random_filename image
     upload_photo image_pathname(file_name), image
 
     @photo = Photo.new
     @photo.original_name = image.original_filename
     @photo.file_name = file_name
+    @photo.caption = caption
+    @photo.story = story
     @photo.save!
   end
 
@@ -67,8 +70,12 @@ class PhotosController < ApplicationController
     ['image/jpeg', 'image/png']
   end
 
-  def create_params
+  def image_params
     params.require(:image_uploads)
+  end
+
+  def text_params
+    params.require(:photo).permit(:caption, :story)
   end
 
   def upload_photo(to_file_name, from_io)

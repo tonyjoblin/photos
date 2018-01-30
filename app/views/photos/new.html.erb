@@ -21,6 +21,14 @@
 <p><a href="<%= photos_url %>">Return to photo wall </a></p>
 
 <%= form_with scope: :photo, url: photos_path, multipart: true, local: true do |form| %>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="photo_caption" name="photo[caption]"><br>
+    <label class="mdl-textfield__label" for="photo_caption">Caption</label>
+  </div><br>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <textarea class="mdl-textfield__input" type="text" rows= "5" id="photo_story" name="photo[story]"></textarea><br>
+    <label class="mdl-textfield__label" for="photo_story">Story behind the photo...</label>
+  </div><br>
   <div>
     <label for="image_uploads" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
         Choose images to upload (PNG, JPG)

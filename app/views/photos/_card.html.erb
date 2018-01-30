@@ -1,13 +1,17 @@
 <div class="photo-card mdl-card mdl-shadow--2dp">
+  <% if photo.caption? %>
   <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">TODO photo caption <%= photo.original_name %></h2>
+    <h2 class="mdl-card__title-text"><%= photo.caption %></h2>
   </div>
+  <% end %>
   <div class="mdl-card__media mdl-card--expand">
     <img class="photo-img" src="<%= photo.url %>" />
   </div>
+  <% if photo.story? %>
   <div class="mdl-card__supporting-text">
-    TODO image description or story
+    <%= photo.story %>
   </div>
+  <% end %>
   <div class="mdl-card__actions mdl-card--border">
     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="<%= photo_url(photo) %>">
       View
