@@ -8,8 +8,8 @@ Originally looking at file uploads as an exercise, because that was what I was w
 
 ## TODO
 
+Positioning of add photo button
 Responsive layout for index page
-Change app title from Files to something else
 Paging on photo index page
 Testing photos controller create action
 Page to display detail of individual photo
@@ -23,9 +23,11 @@ Add optional description to photos.
 Detecting duplicate photo uploads
 AI to automatically detect contents of photo and tag photos
 Allow maximum limit on backend storage used. Enforce through front and backend validations.
+Likes
 
 ## Done
 
+Change app title from Files to something else
 Changed index page layout so scroll bars are on side of page not side of main content inset from sides.
 Use partial to render photo card
 Layout photos in grid

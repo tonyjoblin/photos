@@ -6,21 +6,12 @@
     </button>
   </form>
 
-  <% for i in (0..@photos.length - 1).step(3) %>
-    <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--4-col">
-        <%= render partial: "card", locals: { photo: @photos[i] } %>
+  <div class="mdl-grid">
+    <% @photos.each do |photo| %>
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+        <%= render partial: "card", locals: { photo: photo } %>
       </div>
-      <div class="mdl-cell mdl-cell--4-col">
-        <% if i + 1 < @photos.length %>
-          <%= render partial: "card", locals: { photo: @photos[i + 1] } %>
-        <% end %>
-      </div>
-      <div class="mdl-cell mdl-cell--4-col">
-        <% if i + 2 < @photos.length %>
-          <%= render partial: "card", locals: { photo: @photos[i + 2] } %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+
 </div>
