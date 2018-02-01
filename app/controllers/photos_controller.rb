@@ -40,6 +40,11 @@ class PhotosController < ApplicationController
     end
   end
 
+  def show
+    @photo = Photo.find(params[:id])
+    @photo.url = image_url(@photo.file_name)
+  end
+
   private
 
   def create_ok_msg(image)
@@ -90,7 +95,7 @@ class PhotosController < ApplicationController
   end
 
   def image_url(filename)
-    Pathname.new('uploads').join(filename)
+    Pathname.new('/uploads').join(filename)
   end
 
   def uploads_folder_path

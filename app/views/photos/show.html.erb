@@ -1,0 +1,19 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet"></div>
+
+  <div class="mdl-cell mdl-cell--10-col mdl-cell--6-col-tablet mdl-cell--4-phone">
+    <% if @photo.caption? %>
+      <h2><%= @photo.caption %></h2>
+    <% end %>
+
+    <img class="photo-show" src="<%= @photo.url %>" />
+
+    <% if @photo.story? %>
+      <section>
+        <%= @photo.story %>
+      </section>
+    <% end %>
+  </div>
+
+  <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet"></div>
+</div>
