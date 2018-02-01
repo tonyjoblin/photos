@@ -12,28 +12,23 @@ class PhotosController < ApplicationController
   def new; end
 
   def create
-    # TODO: this only needs to be once off setup code
-    # not every call to create
     create_uploads_folder_if_not_exist
 
     @create_errors = []
-    @create_success = []
-    images = image_params
-    description = text_params
-    images.each do |image|
-      unless content_type_is_valid? image.content_type
-        @create_errors.push(invalid_mime_type_msg(image))
-        next
-      end
-      # render :bad_request unless uploaded_io # TODO fix
-      # TODO check max image sizes
-      # TODO check max image uploads
-      # TODO handle more than one image upload
-      create_and_store_image image, description[:caption], description[:story]
-      @create_success.push create_ok_msg(image)
+    params = create_params
+    image = params[:image]
+
+    @photo = create_photo(params)
+
+    if content_type_is_valid? image.content_type
+      upload_photo image_pathname(@photo.file_name), image
+    else
+      @create_errors.push(invalid_mime_type_msg(image))
+      render action: 'new'
+      return
     end
 
-    if @create_errors.empty?
+    if @photo.save
       redirect_to action: 'index'
     else
       render action: 'new'
@@ -47,24 +42,19 @@ class PhotosController < ApplicationController
 
   private
 
-  def create_ok_msg(image)
-    "The image #{image.original_filename} was successfully uploaded."
+  # Creates a photo object, but does not save it, then
+  # returns it to you.
+  def create_photo(params)
+    photo = Photo.new
+    photo.original_name = params[:image].original_filename
+    photo.file_name = random_filename params[:image]
+    photo.caption = params[:caption]
+    photo.story = params[:story]
+    photo
   end
 
   def invalid_mime_type_msg(image)
-    "The image #{image.original_filename} has an invalid mime type of #{image.content_type}."
-  end
-
-  def create_and_store_image(image, caption, story)
-    file_name = random_filename image
-    upload_photo image_pathname(file_name), image
-
-    @photo = Photo.new
-    @photo.original_name = image.original_filename
-    @photo.file_name = file_name
-    @photo.caption = caption
-    @photo.story = story
-    @photo.save!
+    "The image <strong>#{image.original_filename}</strong> has an invalid mime type of #{image.content_type}."
   end
 
   def content_type_is_valid?(content_type)
@@ -75,12 +65,8 @@ class PhotosController < ApplicationController
     ['image/jpeg', 'image/png']
   end
 
-  def image_params
-    params.require(:image_uploads)
-  end
-
-  def text_params
-    params.require(:photo).permit(:caption, :story)
+  def create_params
+    params.require(:photo).permit(:caption, :story, :image)
   end
 
   def upload_photo(to_file_name, from_io)

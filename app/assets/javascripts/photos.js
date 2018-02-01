@@ -5,7 +5,7 @@
 var input, preview;
 
 function setup() {
-  input = document.querySelector('#image_uploads');
+  input = document.querySelector('#photo_image');
   preview = document.querySelector('.preview');
 
   // hide the file input
@@ -22,7 +22,7 @@ function clearPreviewList() {
 
 function setPreviewListIsEmpty() {
   var para = document.createElement('p');
-  para.textContent = 'No files currently selected for upload';
+  para.textContent = 'No photos are currently selected for upload';
   preview.appendChild(para);
 }
 
