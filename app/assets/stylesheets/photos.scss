@@ -3,12 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .photo-card {
-  width: 320px;
-  // height: 300px;
-  margin: 10px auto 10px auto;
+  // width: 225px;
+  max-height: 460px;
+  margin: 0 auto 0 auto;
 }
 
-.photo-img {
+.photo-card-img {
   background-color: #46B6AC;
   width: auto;
   height: 280px;

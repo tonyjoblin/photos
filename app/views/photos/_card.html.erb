@@ -1,11 +1,11 @@
-<div class="photo-card mdl-card mdl-shadow--2dp">
+<div class="photo-card mdl-card mdl-shadow--6dp">
   <% if photo.caption? %>
   <div class="mdl-card__title">
     <h2 class="mdl-card__title-text"><%= photo.caption %></h2>
   </div>
   <% end %>
   <div class="mdl-card__media mdl-card--expand">
-    <img class="photo-img" src="<%= photo.url %>" />
+    <img class="photo-card-img" src="<%= photo.url %>" />
   </div>
   <% if photo.story? %>
   <div class="mdl-card__supporting-text">
