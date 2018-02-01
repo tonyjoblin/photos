@@ -8,6 +8,9 @@ Originally looking at file uploads as an exercise, because that was what I was w
 
 ## TODO
 
+Error handling around file upload and storage.
+Make url a property on photo model rather than calculate it each time
+Sanitise user input for photo caption and story.
 Positioning of add photo button
 Responsive layout for index page
 Paging on photo index page
@@ -15,7 +18,6 @@ Testing photos controller create action
 Page to display detail of individual photo
 Validate maximum number of photos uploaded.
 Validate maximum image sizes.
-Handle errors from create photo
 Deleting photo
 Adding captions to photos
 Allow tags on photos.
@@ -27,6 +29,7 @@ Likes
 
 ## Done
 
+Story text, preserving format and markup.
 Change app title from Files to something else
 Changed index page layout so scroll bars are on side of page not side of main content inset from sides.
 Use partial to render photo card
