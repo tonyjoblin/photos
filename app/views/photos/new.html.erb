@@ -21,29 +21,24 @@
       <% end %>
     <% end %>
 
-    <%= form_with scope: :photo, url: photos_path, multipart: true, local: true do |form| %>
+    <%= form_for @photo, multipart: true, local: true do |form| %>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" id="photo_caption" name="photo[caption]">
-          <%= @photo.caption if @photo %>
-        </input><br>
-        <label class="mdl-textfield__label" for="photo_caption">Caption</label>
+        <%= form.text_field :caption, class: "mdl-textfield__input" %><br>
+        <%= form.label :caption, class: "mdl-textfield__label" %>
       </div><br>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <textarea class="mdl-textfield__input" type="text" rows="10" cols="80"
-          id="photo_story" maxlength="4096" spellcheck name="photo[story]"><%= @photo.story if @photo %></textarea><br>
-        <label class="mdl-textfield__label" for="photo_story">Story behind the photo...</label>
+        <%= form.text_area :story, rows: 10, cols: 80, class: "mdl-textfield__input", maxlength: 4096, spellcheck: true %>
+        <%= form.label :story, class: "mdl-textfield__label" %>
       </div><br>
       <div>
-        <label for="photo_image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-            Choose image to upload (PNG, JPG)
-        </label>
-        <input type="file" id="photo_image" name="photo[image]" accept=".jpg, .jpeg, .png">
+        <%= form.label :image, "Choose image to upload (PNG, JPG)", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" %>
+        <%= form.file_field :image, accept: "image/jpg,image/png,image/gif", hidden: true %>
       </div>
       <div class="preview">
         <p>No photo currently selected for upload</p>
       </div>
       <div>
-        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Submit</button>
+        <%= form.submit :submit, class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" %>
       </div>
     <% end %>
   </div>

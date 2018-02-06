@@ -9,7 +9,9 @@ class PhotosController < ApplicationController
     end
   end
 
-  def new; end
+  def new
+    @photo = Photo.new
+  end
 
   def create
     create_uploads_folder_if_not_exist
