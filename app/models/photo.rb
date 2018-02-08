@@ -13,15 +13,16 @@ class Photo < ApplicationRecord
 
   class << self
     def create(params)
-      file_name = random_filename(params[:image])
-      Photo.new(
-        original_name: params[:image].original_filename,
-        file_name: file_name,
-        caption: params[:caption],
-        story: params[:story],
-        url: image_url(file_name),
-        content_type: params[:image].content_type
-      )
+      # these are optional so it does not matter if they are nil
+      photo = Photo.new(caption: params[:caption], story: params[:story])
+      image = params[:image]
+      if image
+        photo.original_name = image.original_filename
+        photo.file_name = random_filename(image)
+        photo.url = image_url(photo.file_name)
+        photo.content_type = image.content_type
+      end
+      photo
     end
 
     private
