@@ -28,7 +28,7 @@ function setPreviewListIsEmpty() {
 
 const fileTypes = [
   'image/jpeg',
-  'image/pjpeg',
+  'image/gif',
   'image/png'
 ];
 
