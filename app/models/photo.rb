@@ -11,6 +11,21 @@ class Photo < ApplicationRecord
     message: 'The image must be either a jpg, png or gif file.'
   }
 
+  validates :size, numericality: true
+  validate  :maximum_size
+
+  validates :size, presence: true
+
+  MAXIMUM_ALLOWED_PHOTO_SIZE = (4 * 1024 * 1024)
+
+  def maximum_size
+    @errors.add(:size, max_size_error_msg) if size? && MAXIMUM_ALLOWED_PHOTO_SIZE < size
+  end
+
+  def max_size_error_msg
+    I18n.t('photo.error.max_size', max_size: ActiveSupport::NumberHelper.number_to_human_size(MAXIMUM_ALLOWED_PHOTO_SIZE))
+  end
+
   class << self
     def create(params)
       # these are optional so it does not matter if they are nil
@@ -21,6 +36,7 @@ class Photo < ApplicationRecord
         photo.file_name = random_filename(image)
         photo.url = image_url(photo.file_name)
         photo.content_type = image.content_type
+        photo.size = image.size
       end
       photo
     end
