@@ -6,12 +6,12 @@ var input, preview;
 
 function setup() {
   input = document.querySelector('#photo_image');
-  preview = document.querySelector('.preview');
-
-  // hide the file input
-  input.style.opacity = 0; 
-
-  input.addEventListener('change', updateImageDisplay);
+  if (input) {
+    preview = document.querySelector('.preview');
+    // hide the file input
+    input.style.opacity = 0; 
+    input.addEventListener('change', updateImageDisplay);
+  }
 }
 
 function clearPreviewList() {
