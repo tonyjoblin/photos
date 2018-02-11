@@ -9,9 +9,7 @@
     <img class="photo-show" src="<%= @photo.url %>" />
 
     <% if @photo.story? %>
-      <section>
-        <%= @photo.story %>
-      </section>
+      <section class="story-output"><%= @photo.story %></section>
     <% end %>
   </div>
 
